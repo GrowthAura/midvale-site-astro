@@ -14,9 +14,13 @@ import heroes from '../data/heroes.json';
 // link falls back to that service's hero photo when the area-service
 // page has no hero of its own.
 const { cards, buttonLabel = null } = Astro.props; // [{ href, title, desc?, img? }]
+// Design-fix round (F14): a 4-card list in a 3-column grid strands the
+// 4th card alone on row 2. Four cards render 2+2 on desktop instead
+// (see .card-grid--four in global.css); other counts are unchanged.
+const gridClass = 'card-grid' + (cards.length === 4 ? ' card-grid--four' : '');
 ---
 
-<div class="card-grid">
+<div class={gridClass}>
   {
     cards.map((c) => {
       const hero = heroes[c.href] ?? (c.img ? heroes[c.img] : undefined);

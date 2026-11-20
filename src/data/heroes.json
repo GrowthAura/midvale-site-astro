@@ -1,217 +1,222 @@
 {
-  "/": {
-    "file": "hero-home.webp",
-    "file800": "hero-home-800.webp",
-    "alt": "Two-story gray suburban house with white garage, front porch and green lawn under a spring sky"
-  },
-  "/about/": {
-    "file": "hero-about.webp",
-    "file800": "hero-about-800.webp",
-    "alt": "Modern suburban house with mountain views at sunset"
-  },
-  "/areas/cottonwood-heights/": {
-    "file": "hero-areas-cottonwood-heights.webp",
-    "file800": "hero-areas-cottonwood-heights-800.webp",
-    "alt": "Snow-covered Wasatch Mountains at sunset above a valley"
-  },
-  "/areas/murray/": {
-    "file": "hero-areas-murray.webp",
-    "file800": "hero-areas-murray-800.webp",
-    "alt": "Two-story dark blue-gray suburban house with a covered front porch, stone porch base, white fence and green lawn under a blue sky"
-  },
-  "/areas/murray/burst-pipe-water-damage/": {
-    "file": "hero-areas-murray-burst-pipe-water-damage.webp",
-    "file800": "hero-areas-murray-burst-pipe-water-damage-800.webp",
-    "alt": "Gray-blue two-story suburban house with white garage"
-  },
-  "/areas/sandy/": {
-    "file": "hero-areas-sandy.webp",
-    "file800": "hero-areas-sandy-800.webp",
-    "alt": "Snow-covered suburban street with a brick house and an American flag on the porch"
-  },
-  "/areas/sandy/basement-flooding-cleanup/": {
-    "file": "hero-areas-sandy-basement-flooding-cleanup.webp",
-    "file800": "hero-areas-sandy-basement-flooding-cleanup-800.webp",
-    "alt": "Large two-story beige suburban house with a three-car garage and tall pine trees"
-  },
-  "/areas/sandy/burst-pipe-water-damage/": {
-    "file": "hero-areas-sandy-burst-pipe-water-damage.webp",
-    "file800": "hero-areas-sandy-burst-pipe-water-damage-800.webp",
-    "alt": "Two-story gray and beige suburban house with a white garage and green lawn"
-  },
-  "/areas/south-jordan/": {
-    "file": "hero-areas-south-jordan.webp",
-    "file800": "hero-areas-south-jordan-800.webp",
-    "alt": "Single-story tan suburban ranch house with a covered porch, white garage and green lawn under a blue sky"
-  },
-  "/areas/south-jordan/basement-flooding-cleanup/": {
-    "file": "hero-areas-south-jordan-basement-flooding-cleanup.webp",
-    "file800": "hero-areas-south-jordan-basement-flooding-cleanup-800.webp",
-    "alt": "Modern gray two-story house with a metal roof and green lawn"
-  },
-  "/areas/taylorsville/": {
-    "file": "hero-areas-taylorsville.webp",
-    "file800": "hero-areas-taylorsville-800.webp",
-    "alt": "Two-story gray suburban house with white garage and stone base under a cloudy sky"
-  },
-  "/areas/west-jordan/": {
-    "file": "hero-areas-west-jordan.webp",
-    "file800": "hero-areas-west-jordan-800.webp",
-    "alt": "Two-story stone and siding suburban house with white garage and green lawn under a clear blue sky"
-  },
-  "/areas/west-jordan/burst-pipe-water-damage/": {
-    "file": "hero-areas-west-jordan-burst-pipe-water-damage.webp",
-    "file800": "hero-areas-west-jordan-burst-pipe-water-damage-800.webp",
-    "alt": "White two-story suburban house with black shutters and a green lawn"
-  },
-  "/basement-flooding-cleanup/": {
-    "file": "hero-basement-flooding-cleanup.webp",
-    "file800": "hero-basement-flooding-cleanup-800.webp",
-    "alt": "Finished basement with a glossy wet carpet floor"
-  },
-  "/blog/hidden-water-damage-signs/": {
-    "file": "hero-blog-hidden-water-damage-signs.webp",
-    "file800": "hero-blog-hidden-water-damage-signs-800.webp",
-    "alt": "Close-up of a cracked, stained concrete wall with peeling paint"
-  },
-  "/blog/water-damage-categories-classes/": {
-    "file": "hero-blog-water-damage-categories-classes.webp",
-    "file800": "hero-blog-water-damage-categories-classes-800.webp",
-    "alt": "Dining room with green walls and a glossy wet wood floor"
-  },
-  "/blog/what-to-do-when-a-pipe-bursts/": {
-    "file": "hero-blog-what-to-do-when-a-pipe-bursts.webp",
-    "file800": "hero-blog-what-to-do-when-a-pipe-bursts-800.webp",
-    "alt": "Empty living room with a glossy wet hardwood floor"
-  },
-  "/burst-pipe-water-damage/": {
-    "file": "hero-burst-pipe-water-damage.webp",
-    "file800": "hero-burst-pipe-water-damage-800.webp",
-    "alt": "Galley kitchen with white cabinets and a wet floor patch below the sink"
-  },
-  "/ceiling-water-damage/": {
-    "file": "hero-ceiling-water-damage.webp",
-    "file800": "hero-ceiling-water-damage-800.webp",
-    "alt": "Empty room with a water stain on the ceiling and drip marks on the wall"
-  },
-  "/commercial-water-damage/": {
-    "file": "hero-commercial-water-damage.webp",
-    "file800": "hero-commercial-water-damage-800.webp",
-    "alt": "Modern business center lobby with wooden columns and glass railings"
-  },
-  "/contact/": {
-    "file": "hero-contact.webp",
-    "file800": "hero-contact-800.webp",
-    "alt": "Two-story suburban house with a stone facade and warmly lit windows and front porch at dusk"
-  },
-  "/hardwood-floor-water-damage/": {
-    "file": "hero-hardwood-floor-water-damage.webp",
-    "file800": "hero-hardwood-floor-water-damage-800.webp",
-    "alt": "Empty bedroom with dark wood floor and a wet patch near the wall"
-  },
-  "/leak-detection/": {
-    "file": "hero-leak-detection.webp",
-    "file800": "hero-leak-detection-800.webp",
-    "alt": "Kitchen with wood cabinets and a damp patch on the floor"
-  },
-  "/service-areas/": {
-    "file": "hero-service-areas.webp",
-    "file800": "hero-service-areas-800.webp",
-    "alt": "Snow-covered Wasatch mountain range above a valley town under a pale winter sky"
-  },
-  "/water-heater-leak-cleanup/": {
-    "file": "hero-water-heater-leak-cleanup.webp",
-    "file800": "hero-water-heater-leak-cleanup-800.webp",
-    "alt": "Empty bedroom with a large wet patch spreading across the wood floor"
-  },
-  "/wet-carpet-drying/": {
-    "file": "hero-wet-carpet-drying.webp",
-    "file800": "hero-wet-carpet-drying-800.webp",
-    "alt": "Carpet extraction wand cleaning a damp brown carpet with a dark wet patch"
-  },
-  "/sewage-cleanup/": {
-    "file": "hero-sewage-cleanup.webp",
-    "file800": "hero-sewage-cleanup-800.webp",
-    "alt": "Murky water flowing through a concrete storm drain culvert"
-  },
-  "/water-damage-repair/": {
-    "file": "hero-water-damage-repair.webp",
-    "file800": "hero-water-damage-repair-800.webp",
-    "alt": "Unfinished wall with fresh plaster and paint patches during water damage repair"
-  },
-  "/appliance-leak-water-damage/": {
-    "file": "hero-appliance-leak-water-damage.webp",
-    "file800": "hero-appliance-leak-water-damage-800.webp",
-    "alt": "Stainless steel dishwasher under a kitchen counter beside a double sink"
-  },
-  "/restoration-process/": {
-    "file": "hero-restoration-process.webp",
-    "file800": "hero-restoration-process-800.webp",
-    "alt": "Paint roller, ladder and paint cans on drop cloths during a room repaint"
-  },
-  "/insurance-claims-help/": {
-    "file": "hero-insurance-claims-help.webp",
-    "file800": "hero-insurance-claims-help-800.webp",
-    "alt": "Insurance application form on a clipboard beside a laptop"
-  },
-  "/blog/prevent-frozen-pipes/": {
-    "file": "hero-blog-prevent-frozen-pipes.webp",
-    "file800": "hero-blog-prevent-frozen-pipes-800.webp",
-    "alt": "Two-story suburban house in snow with snow piled along the driveway"
-  },
-  "/blog/winterize-swamp-cooler/": {
-    "file": "hero-blog-winterize-swamp-cooler.webp",
-    "file800": "hero-blog-winterize-swamp-cooler-800.webp",
-    "alt": "Yellow house with a snow-covered red roof in a snowy winter landscape"
-  },
-  "/blog/spring-snowmelt-basement-flooding/": {
-    "file": "hero-blog-spring-snowmelt-basement-flooding.webp",
-    "file800": "hero-blog-spring-snowmelt-basement-flooding-800.webp",
-    "alt": "Snow melting on a residential street with wet pavement and houses"
-  },
-  "/areas/west-jordan/basement-flooding-cleanup/": {
-    "file": "hero-areas-west-jordan-basement-flooding-cleanup.webp",
-    "file800": "hero-areas-west-jordan-basement-flooding-cleanup-800.webp",
-    "alt": "Two-story suburban house with a front porch under a blue sky"
-  },
-  "/mold-remediation/": {
-    "file": "hero-mold-remediation.webp",
-    "file800": "hero-mold-remediation-800.webp",
-    "alt": "Water-stained peeling paint on a weathered wall with rust-colored stains"
-  },
-  "/emergency-water-removal/": {
-    "file": "hero-emergency-water-removal.webp",
-    "file800": "hero-emergency-water-removal-800.webp",
-    "alt": "Standing water across the hardwood floor of a living room during emergency water removal"
-  },
-  "/flood-damage-restoration/": {
-    "file": "hero-flood-damage-restoration.webp",
-    "file800": "hero-flood-damage-restoration-800.webp",
-    "alt": "Standing water covering the carpet of a living room with a fireplace after a flood"
-  },
-  "/structural-drying/": {
-    "file": "hero-structural-drying.webp",
-    "file800": "hero-structural-drying-800.webp",
-    "alt": "Wet carpet sheen across a living room floor during structural drying"
-  },
-  "/ice-dam-water-damage/": {
-    "file": "hero-ice-dam-water-damage.webp",
-    "file800": "hero-ice-dam-water-damage-800.webp",
-    "alt": "Icicles hanging from the eaves of snow-covered suburban houses"
-  },
-  "/swamp-cooler-water-damage/": {
-    "file": "hero-swamp-cooler-water-damage.webp",
-    "file800": "hero-swamp-cooler-water-damage-800.webp",
-    "alt": "Evaporative cooler box mounted on the roof slope of a suburban house"
-  },
-  "/fire-sprinkler-water-cleanup/": {
-    "file": "hero-fire-sprinkler-water-cleanup.webp",
-    "file800": "hero-fire-sprinkler-water-cleanup-800.webp",
-    "alt": "Fire sprinkler head with a red glass bulb spraying water in a corridor"
-  },
-  "/blog/how-long-does-water-damage-take-to-dry/": {
-    "file": "hero-blog-how-long-does-water-damage-take-to-dry.webp",
-    "file800": "hero-blog-how-long-does-water-damage-take-to-dry-800.webp",
-    "alt": "Wet sheen across a light wood floor in an empty room during drying"
-  }
+ "/": {
+  "file": "hero-home.webp",
+  "file800": "hero-home-800.webp",
+  "alt": "Two-story gray suburban house with white garage, front porch and green lawn under a spring sky"
+ },
+ "/about/": {
+  "file": "hero-about.webp",
+  "file800": "hero-about-800.webp",
+  "alt": "Modern suburban house with mountain views at sunset"
+ },
+ "/areas/cottonwood-heights/": {
+  "file": "hero-areas-cottonwood-heights.webp",
+  "file800": "hero-areas-cottonwood-heights-800.webp",
+  "alt": "Snow-covered Wasatch Mountains at sunset above a valley"
+ },
+ "/areas/murray/": {
+  "file": "hero-areas-murray.webp",
+  "file800": "hero-areas-murray-800.webp",
+  "alt": "Two-story dark blue-gray suburban house with a covered front porch, stone porch base, white fence and green lawn under a blue sky"
+ },
+ "/areas/murray/burst-pipe-water-damage/": {
+  "file": "hero-areas-murray-burst-pipe-water-damage.webp",
+  "file800": "hero-areas-murray-burst-pipe-water-damage-800.webp",
+  "alt": "Modern home glowing warm at dusk with a lush lawn and wet reflective driveway and street"
+ },
+ "/areas/sandy/": {
+  "file": "hero-areas-sandy.webp",
+  "file800": "hero-areas-sandy-800.webp",
+  "alt": "Snow-covered suburban street with a brick house and an American flag on the porch"
+ },
+ "/areas/sandy/basement-flooding-cleanup/": {
+  "file": "hero-areas-sandy-basement-flooding-cleanup.webp",
+  "file800": "hero-areas-sandy-basement-flooding-cleanup-800.webp",
+  "alt": "Large two-story beige suburban house with a three-car garage and tall pine trees"
+ },
+ "/areas/sandy/burst-pipe-water-damage/": {
+  "file": "hero-areas-sandy-burst-pipe-water-damage.webp",
+  "file800": "hero-areas-sandy-burst-pipe-water-damage-800.webp",
+  "alt": "Two-story gray and beige suburban house with a white garage and green lawn"
+ },
+ "/areas/south-jordan/": {
+  "file": "hero-areas-south-jordan.webp",
+  "file800": "hero-areas-south-jordan-800.webp",
+  "alt": "Single-story tan suburban ranch house with a covered porch, white garage and green lawn under a blue sky"
+ },
+ "/areas/south-jordan/basement-flooding-cleanup/": {
+  "file": "hero-areas-south-jordan-basement-flooding-cleanup.webp",
+  "file800": "hero-areas-south-jordan-basement-flooding-cleanup-800.webp",
+  "alt": "Modern gray two-story house with a metal roof and green lawn"
+ },
+ "/areas/taylorsville/": {
+  "file": "hero-areas-taylorsville.webp",
+  "file800": "hero-areas-taylorsville-800.webp",
+  "alt": "Two-story gray suburban house with white garage and stone base under a cloudy sky"
+ },
+ "/areas/west-jordan/": {
+  "file": "hero-areas-west-jordan.webp",
+  "file800": "hero-areas-west-jordan-800.webp",
+  "alt": "Two-story stone and siding suburban house with white garage and green lawn under a clear blue sky"
+ },
+ "/areas/west-jordan/burst-pipe-water-damage/": {
+  "file": "hero-areas-west-jordan-burst-pipe-water-damage.webp",
+  "file800": "hero-areas-west-jordan-burst-pipe-water-damage-800.webp",
+  "alt": "White two-story suburban house with black shutters and a green lawn"
+ },
+ "/basement-flooding-cleanup/": {
+  "file": "hero-basement-flooding-cleanup.webp",
+  "file800": "hero-basement-flooding-cleanup-800.webp",
+  "alt": "Finished basement with a glossy wet carpet floor"
+ },
+ "/blog/hidden-water-damage-signs/": {
+  "file": "hero-blog-hidden-water-damage-signs.webp",
+  "file800": "hero-blog-hidden-water-damage-signs-800.webp",
+  "alt": "Close-up of a cracked, stained concrete wall with peeling paint"
+ },
+ "/blog/water-damage-categories-classes/": {
+  "file": "hero-blog-water-damage-categories-classes.webp",
+  "file800": "hero-blog-water-damage-categories-classes-800.webp",
+  "alt": "Dining room with green walls and a glossy wet wood floor"
+ },
+ "/blog/what-to-do-when-a-pipe-bursts/": {
+  "file": "hero-blog-what-to-do-when-a-pipe-bursts.webp",
+  "file800": "hero-blog-what-to-do-when-a-pipe-bursts-800.webp",
+  "alt": "Empty living room with a glossy wet hardwood floor"
+ },
+ "/burst-pipe-water-damage/": {
+  "file": "hero-burst-pipe-water-damage.webp",
+  "file800": "hero-burst-pipe-water-damage-800.webp",
+  "alt": "Galley kitchen with white cabinets and a wet floor patch below the sink"
+ },
+ "/ceiling-water-damage/": {
+  "file": "hero-ceiling-water-damage.webp",
+  "file800": "hero-ceiling-water-damage-800.webp",
+  "alt": "Empty room with a water stain on the ceiling and drip marks on the wall"
+ },
+ "/commercial-water-damage/": {
+  "file": "hero-commercial-water-damage.webp",
+  "file800": "hero-commercial-water-damage-800.webp",
+  "alt": "Bright open office with white desks, blue chairs and big windows with green trees"
+ },
+ "/contact/": {
+  "file": "hero-contact.webp",
+  "file800": "hero-contact-800.webp",
+  "alt": "Two-story suburban house with a stone facade and warmly lit windows and front porch at dusk"
+ },
+ "/hardwood-floor-water-damage/": {
+  "file": "hero-hardwood-floor-water-damage.webp",
+  "file800": "hero-hardwood-floor-water-damage-800.webp",
+  "alt": "Empty bedroom with dark wood floor and a wet patch near the wall"
+ },
+ "/leak-detection/": {
+  "file": "hero-leak-detection.webp",
+  "file800": "hero-leak-detection-800.webp",
+  "alt": "Kitchen with wood cabinets and a damp patch on the floor"
+ },
+ "/service-areas/": {
+  "file": "hero-service-areas.webp",
+  "file800": "hero-service-areas-800.webp",
+  "alt": "Snow-covered Wasatch mountain range above a valley town under a pale winter sky"
+ },
+ "/water-heater-leak-cleanup/": {
+  "file": "hero-water-heater-leak-cleanup.webp",
+  "file800": "hero-water-heater-leak-cleanup-800.webp",
+  "alt": "Empty bedroom with a large wet patch spreading across the wood floor"
+ },
+ "/wet-carpet-drying/": {
+  "file": "hero-wet-carpet-drying.webp",
+  "file800": "hero-wet-carpet-drying-800.webp",
+  "alt": "Carpet extraction wand cleaning a damp brown carpet with a dark wet patch"
+ },
+ "/sewage-cleanup/": {
+  "file": "hero-sewage-cleanup.webp",
+  "file800": "hero-sewage-cleanup-800.webp",
+  "alt": "Murky water flowing through a concrete storm drain culvert"
+ },
+ "/water-damage-repair/": {
+  "file": "hero-water-damage-repair.webp",
+  "file800": "hero-water-damage-repair-800.webp",
+  "alt": "Unfinished wall with fresh plaster and paint patches during water damage repair"
+ },
+ "/appliance-leak-water-damage/": {
+  "file": "hero-appliance-leak-water-damage.webp",
+  "file800": "hero-appliance-leak-water-damage-800.webp",
+  "alt": "Stainless steel dishwasher under a kitchen counter beside a double sink"
+ },
+ "/restoration-process/": {
+  "file": "hero-restoration-process.webp",
+  "file800": "hero-restoration-process-800.webp",
+  "alt": "Paint roller, ladder and paint cans on drop cloths during a room repaint"
+ },
+ "/insurance-claims-help/": {
+  "file": "hero-insurance-claims-help.webp",
+  "file800": "hero-insurance-claims-help-800.webp",
+  "alt": "Insurance application form on a clipboard beside a laptop"
+ },
+ "/blog/prevent-frozen-pipes/": {
+  "file": "hero-blog-prevent-frozen-pipes.webp",
+  "file800": "hero-blog-prevent-frozen-pipes-800.webp",
+  "alt": "Two-story suburban house in snow with snow piled along the driveway"
+ },
+ "/blog/winterize-swamp-cooler/": {
+  "file": "hero-blog-winterize-swamp-cooler.webp",
+  "file800": "hero-blog-winterize-swamp-cooler-800.webp",
+  "alt": "Yellow house with a snow-covered red roof in a snowy winter landscape"
+ },
+ "/blog/spring-snowmelt-basement-flooding/": {
+  "file": "hero-blog-spring-snowmelt-basement-flooding.webp",
+  "file800": "hero-blog-spring-snowmelt-basement-flooding-800.webp",
+  "alt": "Snow melting on a residential street with wet pavement and houses"
+ },
+ "/areas/west-jordan/basement-flooding-cleanup/": {
+  "file": "hero-areas-west-jordan-basement-flooding-cleanup.webp",
+  "file800": "hero-areas-west-jordan-basement-flooding-cleanup-800.webp",
+  "alt": "Two-story suburban house with a front porch under a blue sky"
+ },
+ "/mold-remediation/": {
+  "file": "hero-mold-remediation.webp",
+  "file800": "hero-mold-remediation-800.webp",
+  "alt": "Water-stained peeling paint on a weathered wall with rust-colored stains"
+ },
+ "/emergency-water-removal/": {
+  "file": "hero-emergency-water-removal.webp",
+  "file800": "hero-emergency-water-removal-800.webp",
+  "alt": "Standing water across the hardwood floor of a living room during emergency water removal"
+ },
+ "/flood-damage-restoration/": {
+  "file": "hero-flood-damage-restoration.webp",
+  "file800": "hero-flood-damage-restoration-800.webp",
+  "alt": "Standing water covering the carpet of a living room with a fireplace after a flood"
+ },
+ "/structural-drying/": {
+  "file": "hero-structural-drying.webp",
+  "file800": "hero-structural-drying-800.webp",
+  "alt": "Wet carpet sheen across a living room floor during structural drying"
+ },
+ "/ice-dam-water-damage/": {
+  "file": "hero-ice-dam-water-damage.webp",
+  "file800": "hero-ice-dam-water-damage-800.webp",
+  "alt": "Icicles hanging from the eaves of snow-covered suburban houses"
+ },
+ "/swamp-cooler-water-damage/": {
+  "file": "hero-swamp-cooler-water-damage.webp",
+  "file800": "hero-swamp-cooler-water-damage-800.webp",
+  "alt": "Evaporative cooler box mounted on the roof slope of a suburban house"
+ },
+ "/fire-sprinkler-water-cleanup/": {
+  "file": "hero-fire-sprinkler-water-cleanup.webp",
+  "file800": "hero-fire-sprinkler-water-cleanup-800.webp",
+  "alt": "Fire sprinkler head with a red glass bulb spraying water in a corridor"
+ },
+ "/blog/how-long-does-water-damage-take-to-dry/": {
+  "file": "hero-blog-how-long-does-water-damage-take-to-dry.webp",
+  "file800": "hero-blog-how-long-does-water-damage-take-to-dry-800.webp",
+  "alt": "Wet sheen across a light wood floor in an empty room during drying"
+ },
+ "/window-well-flooding/": {
+  "file": "hero-window-well-flooding.webp",
+  "file800": "hero-window-well-flooding-800.webp",
+  "alt": "Unfinished basement with painted concrete-block walls, exposed ceiling joists, stairs and laundry sink, with a small high basement window showing blue sky and green trees"
+ }
 }

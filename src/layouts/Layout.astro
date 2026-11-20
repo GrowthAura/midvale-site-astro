@@ -158,14 +158,82 @@ const footerServices = servicePages.filter((s) => !headerServices.includes(s));
         </div>
         <div class="map-block">
           <h2>Find Us</h2>
-          <iframe
-            title="Map of the Midvale, Utah service area"
-            src="https://www.google.com/maps?q=Midvale,+UT+84047&output=embed"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen
-          ></iframe>
+          <div class="map-wrap">
+            <iframe
+              id="map-frame"
+              title="Map of the Midvale, Utah service area"
+              src="https://www.google.com/maps?q=Midvale,+UT+84047&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+            <div class="map-fallback" id="map-fallback">
+              <p class="map-fallback-title">Serving Midvale, Utah</p>
+              <p>Water damage restoration across Midvale and nearby areas in the Salt Lake Valley.</p>
+              <ul class="map-fallback-areas">
+                {areaPages.map((s) => (
+                  <li><a href={s.slug}>{labelFor(s)}</a></li>
+                ))}
+              </ul>
+              <a class="btn btn-gold" href={SITE.tel}>Call {SITE.phone}</a>
+            </div>
+          </div>
         </div>
+        <script>
+          // Load-gated map fallback (design-fix round, F08): the Google
+          // embed is never removed. Two subtleties found by verification:
+          // (1) the iframe is loading="lazy", so a timer started at page
+          // load would wrongly fire for anyone who reads >6s before
+          // scrolling down — the check therefore arms only when the map
+          // block first comes near the viewport (IntersectionObserver,
+          // 200px margin). (2) the iframe's load event fires even when
+          // the embed FAILS (Chromium shows an error page inside the
+          // frame and that page's load fires; blocked vs allowed are
+          // indistinguishable via load/contentDocument/contentWindow —
+          // probed 2026-11-20). So success is NOT judged by load. The
+          // gate is a fetch probe (mode no-cors) against the same embed
+          // URL: it resolves when the network can reach Google and
+          // rejects (TypeError) when blocked/offline — probed in this
+          // VM. Resolve within 6s: leave the map alone. Reject, or no
+          // answer within 6s: show the styled service-area panel and
+          // hide the iframe so the block is never a void.
+          (function () {
+            var frame = document.getElementById('map-frame');
+            var fb = document.getElementById('map-fallback');
+            if (!frame || !fb) return;
+            var settled = false;
+            function showFallback() {
+              if (settled) return;
+              settled = true;
+              fb.classList.add('is-visible');
+              frame.style.display = 'none';
+            }
+            function probe() {
+              var ctl = ('AbortController' in window) ? new AbortController() : null;
+              var timer = setTimeout(function () {
+                if (ctl) ctl.abort();
+                showFallback();
+              }, 6000);
+              var opts = { mode: 'no-cors' };
+              if (ctl) opts.signal = ctl.signal;
+              fetch(frame.src, opts).then(function () {
+                clearTimeout(timer);
+                settled = true;
+              }).catch(function () {
+                clearTimeout(timer);
+                showFallback();
+              });
+            }
+            if ('IntersectionObserver' in window) {
+              var io = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) { io.disconnect(); probe(); }
+              }, { rootMargin: '200px' });
+              io.observe(frame);
+            } else {
+              probe();
+            }
+          })();
+        </script>
         <p class="footer-base">
           <span class="footer-brand">Water Damage Restoration Midvale</span><br />
           Water damage restoration in Midvale, Utah. Open 24 hours a day, 7 days a week.

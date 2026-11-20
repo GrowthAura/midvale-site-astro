@@ -228,11 +228,15 @@ main { display: block; }
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(100deg, rgba(6, 35, 31, 0.90) 0%, rgba(8, 46, 43, 0.80) 55%, rgba(14, 79, 74, 0.64) 100%);
+  /* Design-fix round: the old overlay (0.90 / 0.80 / 0.64) buried all 43
+     inner hero photos under a flat teal wash. Lighter + directional:
+     darkest at the left where the H1 sits, open at the right so the
+     photo actually reads. Text keeps a shadow for legibility (below). */
+  background: linear-gradient(100deg, rgba(6, 35, 31, 0.82) 0%, rgba(8, 46, 43, 0.68) 45%, rgba(14, 79, 74, 0.38) 100%);
 }
 .hero .wrap { position: relative; z-index: 2; }
-.hero h1 { color: #fff; margin-bottom: 0.5em; max-width: 24ch; }
-.hero-intro { font-size: 1.15rem; line-height: 1.6; color: #dcebe6; max-width: 68ch; }
+.hero h1 { color: #fff; margin-bottom: 0.5em; max-width: 24ch; text-shadow: 0 2px 18px rgba(6, 35, 31, 0.6); }
+.hero-intro { font-size: 1.15rem; line-height: 1.6; color: #dcebe6; max-width: 68ch; text-shadow: 0 1px 12px rgba(6, 35, 31, 0.55); }
 .hero-intro a { color: var(--gold-soft); }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.6rem; }
 
@@ -483,6 +487,13 @@ tr:last-child td { border-bottom: 0; }
 .card--hot .card-title { margin-bottom: 0; }
 .card--hot .card-btn { margin-top: auto; align-self: flex-start; }
 
+/* Design-fix round: a 4-card grid in 3 columns strands the 4th card
+   alone on row 2 (mold page, "Why Mold Grows..."). Four cards render
+   2+2 on desktop instead; 2-col and 1-col breakpoints are unchanged. */
+@media (min-width: 1021px) {
+  .card-grid--four { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* ---------- footer ---------- */
 .site-footer {
   background: linear-gradient(180deg, var(--teal-900), var(--teal-950));
@@ -529,6 +540,51 @@ tr:last-child td { border-bottom: 0; }
   border-radius: 1rem;
   filter: saturate(0.9);
 }
+/* Design-fix round (F08): load-gated map fallback. The Google embed
+   fails in sandboxed/offline browsers and would leave a ~500px void.
+   The fallback panel sits behind the iframe's box (same height) and is
+   shown by the small script in Layout.astro ONLY if the iframe has not
+   fired load within ~6s; when the embed loads it stays hidden. City-
+   level service-area panel only: area links + call button, no pin, no
+   invented street address (service-area business). */
+.map-wrap { position: relative; }
+.map-fallback {
+  display: none;
+  background: linear-gradient(160deg, var(--teal-800), var(--teal-700));
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 1rem;
+  padding: 1.6rem 1.6rem 1.4rem;
+  min-height: 22rem;
+}
+.map-fallback.is-visible { display: block; }
+.map-fallback-title {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  color: #fff;
+  margin: 0 0 0.5em;
+}
+.map-fallback p { color: #dcebe6; margin: 0 0 1em; }
+.map-fallback-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0 0 1.2em;
+  padding: 0;
+}
+.map-fallback-areas a {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(246, 200, 119, 0.55);
+  color: #fdf8ec !important;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  text-decoration: none;
+}
+.map-fallback-areas a:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
 .footer-base {
   margin-top: 2.2rem;
   padding-top: 1.4rem;
@@ -620,9 +676,10 @@ tr:last-child td { border-bottom: 0; }
      the CTAs. Desktop hero is untouched. */
   .hero { padding: 1.2rem 0 3.2rem; }
   /* Hero photo on mobile: text spans the full width, so the overlay is
-     near-uniform dark instead of directional. */
+     near-uniform dark instead of directional. Design-fix round: same
+     lightening as desktop (was 0.88 / 0.84) so the photo reads. */
   .hero.has-hero::before {
-    background: linear-gradient(180deg, rgba(6, 35, 31, 0.88) 0%, rgba(8, 46, 43, 0.84) 100%);
+    background: linear-gradient(180deg, rgba(6, 35, 31, 0.78) 0%, rgba(8, 46, 43, 0.62) 100%);
   }
   .hero h1 { font-size: 1.6rem; margin-bottom: 0.45em; }
   /* Fix Round 3: mobile H1 1.9rem -> 1.6rem. At 1.9rem five H1s wrapped
@@ -681,6 +738,12 @@ tr:last-child td { border-bottom: 0; }
      untouched. */
   .faq-item { padding: 1.2rem 0.9rem 0.4rem; }
   .faq-item h3 { font-size: 1.1rem; }
+  /* Design-fix round (F12/F13): these two H2s orphan one word on the
+     last line at 390px ("Belongings" / "FAQs" alone) even under
+     text-wrap: balance. At 1.2rem (24px, still above the 20px floor)
+     each fits on ONE line at 390px — measured, not guessed. Words are
+     unchanged; the class is set in Blocks.astro by exact heading text. */
+  h2.h2--tight { font-size: 1.2rem; }
   /* Fix Round 3 (Tab 38 residual): 'Do you serve Glenmoor and the
      older east-side neighborhoods?' still ended 'neighborhoods?' alone
      at 1.1rem; at 1.0rem it wraps cleanly on 2 lines. Scoped to that

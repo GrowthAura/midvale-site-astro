@@ -16,6 +16,15 @@ import CardGrid from './CardGrid.astro';
 const { blocks } = Astro.props;
 const slug = Astro.props.slug;
 
+/** Design-fix round (F12/F13): these two exact H2s orphan one word on
+ *  the last line at 390px even under text-wrap: balance. The class only
+ *  shrinks the heading at mobile so it fits one line (see global.css);
+ *  heading words are never changed. */
+const TIGHT_H2 = new Set(['Protecting Your Belongings', 'Mold Remediation FAQs']);
+function h2Class(t) {
+  return TIGHT_H2.has(t) ? 'h2--tight' : undefined;
+}
+
 /** A list item becomes a card iff it leads with exactly one link and the
  *  rest (if any) is a single ": ..." description segment. The anchor text
  *  is the card title, the description is the card line, the href is the
@@ -150,7 +159,7 @@ function closingUnits(p) {
       const tail = blocks.slice(closingStart + 1);
       return (
         <section class="closing">
-          <h2>{b.text}</h2>
+          <h2 class={h2Class(b.text)}>{b.text}</h2>
           {tail.map((p) => (
             <p class={closingClass(p)}>
               {closingUnits(p).map((s) =>
@@ -230,7 +239,7 @@ function closingUnits(p) {
         </ul>
       );
     }
-    if (b.type === 'h2') return <h2>{b.text}</h2>;
+    if (b.type === 'h2') return <h2 class={h2Class(b.text)}>{b.text}</h2>;
     if (b.type === 'h3') {
       if (b.faq && next?.type === 'p') {
         return (
