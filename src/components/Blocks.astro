@@ -1,5 +1,6 @@
 ---
 import Segments from './Segments.astro';
+import CardGrid from './CardGrid.astro';
 // Renders one page's parsed doc blocks verbatim. No words are added,
 // removed or reordered here; links come only from the doc annotations
 // already resolved by scripts/parse_doc.py.
@@ -9,14 +10,45 @@ import Segments from './Segments.astro';
 //    inside a "facts" card ("Quick facts" on the homepage);
 //  - an FAQ H3 + the paragraph that follows it stay together in one
 //    .faq-item card (the paragraph is then skipped as a standalone block).
+//  - a list whose items are (nearly) all links becomes a photo card grid
+//    instead of bullets (see cardData/isCardList). Such a list is NOT
+//    paired into a facts card: its lead-in paragraph renders standalone.
 const { blocks } = Astro.props;
+const slug = Astro.props.slug;
+
+/** A list item becomes a card iff it leads with exactly one link and the
+ *  rest (if any) is a single ": ..." description segment. The anchor text
+ *  is the card title, the description is the card line, the href is the
+ *  card link — words and links unchanged. Two-link items, plain-text
+ *  items and self-links stay plain list items. */
+function cardData(item) {
+  const links = item.filter((s) => s.href);
+  if (links.length !== 1) return null;
+  if (item[0] !== links[0]) return null;
+  const href = links[0].href;
+  if (href === slug) return null;
+  const rest = item.slice(1);
+  if (rest.length === 0) return { href, title: links[0].t, desc: null };
+  if (rest.length === 1 && !rest[0].href && rest[0].t.startsWith(':')) {
+    return { href, title: links[0].t, desc: rest[0].t.replace(/^:\s*/, '') };
+  }
+  return null;
+}
+function isCardList(b) {
+  if (b.type !== 'ul') return false;
+  const elig = b.items.map(cardData).filter(Boolean).length;
+  // A real index list: at least 4 link-led items and most of the list.
+  // Process/step lists (2 bare links among 4-5 steps) stay plain lists.
+  return elig >= 4 && elig / b.items.length >= 0.6;
+}
 
 const skip = new Set();
 blocks.forEach((b, i) => {
   if (b.type === 'h3' && b.faq && blocks[i + 1]?.type === 'p') skip.add(i + 1);
 });
 blocks.forEach((b, i) => {
-  if (b.type === 'p' && !skip.has(i) && blocks[i + 1]?.type === 'ul') skip.add(i + 1);
+  if (b.type === 'p' && !skip.has(i) && blocks[i + 1]?.type === 'ul' && !isCardList(blocks[i + 1]))
+    skip.add(i + 1);
 });
 ---
 
@@ -25,7 +57,7 @@ blocks.forEach((b, i) => {
     if (skip.has(i)) return null;
     const next = blocks[i + 1];
     if (b.type === 'p') {
-      if (next?.type === 'ul') {
+      if (next?.type === 'ul' && !isCardList(next)) {
         return (
           <div class="facts">
             <p class="lead-in">
@@ -48,6 +80,29 @@ blocks.forEach((b, i) => {
       );
     }
     if (b.type === 'ul') {
+      if (isCardList(b)) {
+        const cards = [];
+        const plain = [];
+        b.items.forEach((it) => {
+          const c = cardData(it);
+          if (c) cards.push(c);
+          else plain.push(it);
+        });
+        return (
+          <>
+            <CardGrid cards={cards} />
+            {plain.length > 0 && (
+              <ul>
+                {plain.map((it) => (
+                  <li>
+                    <Segments segments={it} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        );
+      }
       return (
         <ul>
           {b.items.map((it, j) => (

@@ -19,13 +19,13 @@
   --gold-soft: #f6c877;
   --gold-deep: #8a5e10; /* gold dark enough for text on light backgrounds */
   --cream: #faf6ef;
-  --paper: #fffdf8;
+  --paper: #fffefa;
   --ink: #1f2a28;
   --muted: #46554f;
   --line: #d8ddd6;
   --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --content: 1200px;
+  --content: 1360px;
 }
 
 * { box-sizing: border-box; }
@@ -67,11 +67,28 @@ h1, h2, h3 {
 h1 { font-size: clamp(2.1rem, 4.6vw, 3.2rem); letter-spacing: -0.01em; }
 h2 {
   font-size: clamp(1.6rem, 3vw, 2.1rem);
-  margin-top: 2.2em;
-  padding-bottom: 0.35em;
-  border-bottom: 3px solid var(--gold);
+  margin-top: 2.6em;
+  padding-bottom: 0.45em;
+  border-bottom: 1px solid var(--line);
 }
-h3 { font-size: 1.45rem; margin-top: 1.6em; color: var(--teal-800); }
+/* Luxury H2: deep teal ink, hairline rule, one short gold tick — gold is
+   an accent here, never a wash. */
+h2::after {
+  content: '';
+  display: block;
+  width: 3.5rem;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-top: 0.45em;
+}
+h3 { font-size: 1.45rem; margin-top: 1.6em; color: var(--teal-700); }
+/* Section H3s (direct children of the article, not FAQ cards): a restrained
+   gold left tick. FAQ H3s inside .faq-item are untouched. */
+.article > h3 {
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--gold);
+}
 
 p { margin: 0 0 1.1em; }
 main p, main li, main td, main th { font-size: 1rem; line-height: 1.65; }
@@ -80,8 +97,8 @@ strong { font-weight: 700; }
 /* ---------- layout ---------- */
 .wrap { max-width: var(--content); margin: 0 auto; padding: 0 1.25rem; }
 main { display: block; }
-.article { padding: 2.5rem 0 3.5rem; }
-.article > * { max-width: 1200px; }
+.article { padding: 3rem 0 4rem; }
+.article > * { max-width: 1360px; }
 
 /* ---------- header ---------- */
 .site-header {
@@ -136,7 +153,7 @@ main { display: block; }
 }
 .main-nav a:hover, .main-nav a[aria-current="page"] {
   color: #fff;
-  background: rgba(232, 163, 61, 0.22);
+  background: rgba(255, 255, 255, 0.14);
 }
 .has-drop { position: relative; }
 .has-drop > a::after {
@@ -158,7 +175,7 @@ main { display: block; }
   list-style: none;
   margin: 0;
   background: var(--teal-900);
-  border: 1px solid rgba(232, 163, 61, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 0.6rem;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
 }
@@ -181,11 +198,18 @@ main { display: block; }
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(60rem 22rem at 85% -10%, rgba(232, 163, 61, 0.28), transparent 60%),
+    radial-gradient(60rem 22rem at 85% -10%, rgba(27, 125, 114, 0.35), transparent 60%),
     radial-gradient(50rem 26rem at -10% 110%, rgba(27, 125, 114, 0.55), transparent 60%),
     linear-gradient(135deg, var(--teal-900) 0%, var(--teal-800) 55%, var(--teal-700) 100%);
   color: #f2f7f4;
   padding: 3.4rem 0 3.2rem;
+}
+/* Desktop: a taller, full-bleed hero — the photo gets room to breathe and
+   the text sits centred in it. Mobile padding is untouched (Fix Round 1
+   CTA clearance above the call bar). */
+@media (min-width: 821px) {
+  .hero { padding: 4.2rem 0 4rem; min-height: 24rem; display: flex; align-items: center; }
+  .hero .wrap { width: 100%; }
 }
 /* Hero photo (images round): full-bleed cover photo behind the text.
    Dark teal overlay keeps the white H1 / pale intro readable over any
@@ -207,8 +231,8 @@ main { display: block; }
   background: linear-gradient(100deg, rgba(6, 35, 31, 0.90) 0%, rgba(8, 46, 43, 0.80) 55%, rgba(14, 79, 74, 0.64) 100%);
 }
 .hero .wrap { position: relative; z-index: 2; }
-.hero h1 { color: #fff; margin-bottom: 0.5em; max-width: 22ch; }
-.hero-intro { font-size: 1.15rem; line-height: 1.6; color: #dcebe6; max-width: 62ch; }
+.hero h1 { color: #fff; margin-bottom: 0.5em; max-width: 24ch; }
+.hero-intro { font-size: 1.15rem; line-height: 1.6; color: #dcebe6; max-width: 68ch; }
 .hero-intro a { color: var(--gold-soft); }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.6rem; }
 
@@ -227,8 +251,8 @@ main { display: block; }
 }
 .btn-gold { background: var(--gold); color: #23180a; }
 .btn-gold:hover { background: var(--gold-soft); color: #23180a; }
-.btn-outline { border-color: var(--gold-soft); color: #ffe9c4; background: transparent; }
-.btn-outline:hover { background: rgba(232, 163, 61, 0.18); color: #fff; }
+.btn-outline { border-color: rgba(255, 255, 255, 0.7); color: #fdf8ec; background: transparent; }
+.btn-outline:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
 .btn-teal { background: var(--teal-700); color: #fff; }
 .btn-teal:hover { background: var(--teal-600); color: #fff; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 1.4rem 0 1.8rem; }
@@ -253,7 +277,7 @@ main { display: block; }
   top: 0.62em;
   width: 0.6rem;
   height: 0.6rem;
-  background: var(--gold);
+  background: var(--teal-600);
   border-radius: 2px;
   transform: rotate(45deg);
 }
@@ -263,8 +287,8 @@ main { display: block; }
 .facts {
   background: var(--paper);
   border: 1px solid var(--line);
-  border-left: 6px solid var(--gold);
-  border-radius: 0.75rem;
+  border-left: 4px solid var(--teal-600);
+  border-radius: 1rem;
   padding: 1.4rem 1.5rem 0.6rem;
   margin: 0 0 1.8em;
   box-shadow: 0 6px 22px rgba(8, 46, 43, 0.07);
@@ -275,7 +299,7 @@ main { display: block; }
 .facts ul li::before { background: var(--teal-600); }
 
 /* tables */
-.table-wrap { overflow-x: auto; margin: 0 0 1.8em; border-radius: 0.75rem; box-shadow: 0 6px 22px rgba(8, 46, 43, 0.08); }
+.table-wrap { overflow-x: auto; margin: 0 0 1.8em; border-radius: 1rem; box-shadow: 0 6px 22px rgba(8, 46, 43, 0.08); }
 table { width: 100%; border-collapse: collapse; background: var(--paper); font-size: 1rem; }
 caption { text-align: left; font-weight: 700; padding: 0.6rem 0; color: var(--teal-800); }
 th, td { padding: 0.75rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
@@ -292,8 +316,8 @@ tr:last-child td { border-bottom: 0; }
 .faq-item {
   background: var(--paper);
   border: 1px solid var(--line);
-  border-left: 6px solid var(--gold);
-  border-radius: 0.75rem;
+  border-left: 4px solid var(--teal-600);
+  border-radius: 1rem;
   padding: 1.2rem 1.4rem 0.4rem;
   margin: 0 0 1.1em;
 }
@@ -302,6 +326,63 @@ tr:last-child td { border-bottom: 0; }
 
 /* section link lists (Related / areas) */
 .related { margin-top: 2.5em; }
+
+/* ---------- image cards (services / areas / related) ----------
+   A doc link-list (every item a link, optionally followed by a ": ..."
+   description) renders as a photo card grid instead of a bullet list.
+   Words and links are unchanged — the list item's anchor text is the card
+   title, its ": ..." text is the card line, its href is the card link.
+   The photo is the target page's own hero image. */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  margin: 0 0 2em;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 8px 26px rgba(8, 46, 43, 0.08);
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover, .card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(8, 46, 43, 0.16);
+  color: var(--ink);
+}
+.card-img {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--teal-800), var(--teal-600));
+}
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* No hero photo for the target yet: an honest deep-teal tile with a thin
+   gold foot rule — no invented imagery, no fake photo. */
+.card-img--empty { border-bottom: 3px solid var(--gold); }
+.card-body { display: block; padding: 1.1rem 1.25rem 1.3rem; }
+.card-title {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  color: var(--teal-900);
+  margin: 0 0 0.4em;
+  text-wrap: balance;
+}
+.card-desc { display: block; margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.55; }
 
 /* ---------- footer ---------- */
 .site-footer {
@@ -320,7 +401,7 @@ tr:last-child td { border-bottom: 0; }
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #f2ede3;
   border: 0;
   padding: 0;
   margin: 0 0 0.9em;
@@ -328,7 +409,7 @@ tr:last-child td { border-bottom: 0; }
 .footer-col ul { list-style: none; margin: 0; padding: 0; }
 .footer-col li { margin-bottom: 0.45em; }
 .footer-col a { color: #e6f0ec; text-decoration: none; font-size: 1rem; }
-.footer-col a:hover { color: var(--gold-soft); text-decoration: underline; }
+.footer-col a:hover { color: #fff; text-decoration: underline; }
 .footer-brand { font-family: var(--serif); font-size: 1.3rem; font-weight: 800; color: #fff; line-height: 1.25; }
 .footer-phone { display: inline-block; margin-top: 0.8em; font-size: 1.15rem; font-weight: 700; color: var(--gold-soft) !important; }
 .map-block { margin-top: 2.2rem; }
@@ -338,7 +419,7 @@ tr:last-child td { border-bottom: 0; }
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #f2ede3;
   border: 0;
   padding: 0;
   margin: 0 0 0.9em;
@@ -346,7 +427,7 @@ tr:last-child td { border-bottom: 0; }
 .map-block iframe {
   width: 100%;
   height: 22rem;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   filter: saturate(0.9);
 }
 .footer-base {
@@ -381,6 +462,7 @@ tr:last-child td { border-bottom: 0; }
   .main-nav > ul { gap: 0; }
   .main-nav a { padding: 0.55rem 0.5rem; }
   .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 820px) {
   .wrap { padding: 0 1rem; }
@@ -406,7 +488,7 @@ tr:last-child td { border-bottom: 0; }
     position: absolute;
     left: 0; right: 0; top: 100%;
     background: var(--teal-900);
-    border-top: 1px solid rgba(232, 163, 61, 0.45);
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
     /* Bottom padding = call-bar height + margin, so the last menu item can
        scroll clear of the fixed bar even if the bar is ever shown. */
     padding: 0.8rem 1.25rem 5.5rem;
@@ -418,13 +500,13 @@ tr:last-child td { border-bottom: 0; }
     font-size: 1rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: #f2ede3;
     border: 0; padding: 0; margin: 1em 0 0.4em;
   }
   .mobile-links ul { list-style: none; margin: 0; padding: 0; }
   .mobile-links li { margin-bottom: 0.35em; }
   .mobile-links a { color: #eef5f2; text-decoration: none; font-weight: 600; font-size: 1rem; }
-  .mobile-links a:hover { color: var(--gold-soft); }
+  .mobile-links a:hover { color: #fff; }
   .site-header { position: relative; }
   .call-bar { display: block; }
   /* Fix Round 1: while the mobile menu is open the sticky call bar is
@@ -505,6 +587,7 @@ tr:last-child td { border-bottom: 0; }
   .footer-grid { grid-template-columns: 1fr; gap: 1.6rem; }
   .map-block iframe { height: 18rem; }
   .btn { padding: 0.8rem 1.2rem; }
+  .card-grid { grid-template-columns: 1fr; gap: 1.1rem; }
 }
 @media (max-width: 400px) {
   html { font-size: 20px; }

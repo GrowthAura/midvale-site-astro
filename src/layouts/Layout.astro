@@ -18,6 +18,10 @@ const hero = heroes[page.slug];
 const canonical = canonicalFor(page.slug);
 const ld = jsonLd(page);
 const current = page.slug;
+/** Footer Services lists ONLY the services NOT in the header dropdown
+ *  (headerServices = first 10 of servicePages), so no service is listed
+ *  in both places. */
+const footerServices = servicePages.filter((s) => !headerServices.includes(s));
 ---
 
 <!doctype html>
@@ -120,7 +124,7 @@ const current = page.slug;
           <div class="footer-col">
             <h2>Services</h2>
             <ul>
-              {servicePages.map((s) => (
+              {footerServices.map((s) => (
                 <li><a href={s.slug} aria-current={s.slug === current ? 'page' : undefined}>{labelFor(s)}</a></li>
               ))}
             </ul>
