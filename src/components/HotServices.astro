@@ -1,0 +1,26 @@
+---
+import CardGrid from './CardGrid.astro';
+import hotServices from '../data/hot-services.json';
+// "Hot Services in [City]" — user-ordered section on the 6 area pages.
+// Data lives in src/data/hot-services.json (NOT in pages.json, so the
+// doc record stays verbatim): 8 cards per area, picked from that area
+// page's own doc content — its "Water Damage Services in [City]" list
+// plus the services its problem sections link to. Card H3s are
+// "Service in City"; the button links to the area-service page where
+// one exists for that service+area, otherwise the service page. No
+// description lines: nothing is claimed beyond the doc (no invented
+// promises, certifications or availability claims).
+const { slug } = Astro.props;
+const entry = hotServices[slug];
+---
+
+{
+  entry && (
+    <section class="hot-services" aria-labelledby="hot-services-heading">
+      <div class="wrap">
+        <h2 id="hot-services-heading">Hot Services in {entry.city}</h2>
+        <CardGrid cards={entry.cards} buttonLabel="Learn More" />
+      </div>
+    </section>
+  )
+}

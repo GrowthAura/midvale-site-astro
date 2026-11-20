@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Blocks from '../components/Blocks.astro';
+import HotServices from '../components/HotServices.astro';
 import Segments from '../components/Segments.astro';
 import { pages } from '../lib/site.js';
 import heroes from '../data/heroes.json';
@@ -80,5 +81,9 @@ const bodyBlocks = blocks.filter(
     <div class="wrap article">
       <Blocks blocks={bodyBlocks} slug={page.slug} />
     </div>
+    {/* Hot Services (user-ordered, area pages only): after the article
+        content, before the footer — the article ends on its call CTA,
+        so the section reads as the next step, not an interruption. */}
+    <HotServices slug={page.slug} />
   </main>
 </Layout>

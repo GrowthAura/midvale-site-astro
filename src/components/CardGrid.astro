@@ -5,34 +5,67 @@ import heroes from '../data/heroes.json';
 // line, its href is the card link. The photo is the target page's own
 // hero image from heroes.json; a target with no hero yet gets an honest
 // deep-teal tile (no invented imagery, no fake photo).
-const { cards } = Astro.props; // [{ href, title, desc }]
+//
+// Hot variant (buttonLabel set, used by the "Hot Services in [City]"
+// section on area pages): the card is an <article> with a real H3 title
+// and a button link, instead of one big link wrapping everything (a
+// button cannot nest inside a link). The image is still the target's
+// hero photo; `img` gives the base service slug so an area-service
+// link falls back to that service's hero photo when the area-service
+// page has no hero of its own.
+const { cards, buttonLabel = null } = Astro.props; // [{ href, title, desc?, img? }]
 ---
 
 <div class="card-grid">
   {
     cards.map((c) => {
-      const hero = heroes[c.href];
-      return (
-        <a class="card" href={c.href}>
-          {hero ? (
-            <span class="card-img">
-              <img
-                src={'/images/' + hero.file}
-                srcset={'/images/' + hero.file800 + ' 800w, /images/' + hero.file + ' 1600w'}
-                sizes="(max-width: 820px) 100vw, (max-width: 1020px) 50vw, 33vw"
-                alt={hero.alt}
-                loading="lazy"
-                decoding="async"
-              />
+      const hero = heroes[c.href] ?? (c.img ? heroes[c.img] : undefined);
+      const img = hero ? (
+        <img
+          src={'/images/' + hero.file}
+          srcset={'/images/' + hero.file800 + ' 800w, /images/' + hero.file + ' 1600w'}
+          sizes="(max-width: 820px) 100vw, (max-width: 1020px) 50vw, 33vw"
+          alt={hero.alt}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : null;
+      if (!buttonLabel) {
+        return (
+          <a class="card" href={c.href}>
+            {hero ? (
+              <span class="card-img">{img}</span>
+            ) : (
+              <span class="card-img card-img--empty" aria-hidden="true" />
+            )}
+            <span class="card-body">
+              <span class="card-title">{c.title}</span>
+              {c.desc && <span class="card-desc">{c.desc}</span>}
             </span>
+          </a>
+        );
+      }
+      return (
+        <article class="card card--hot">
+          {hero ? (
+            <a class="card-img" href={c.href} aria-label={c.title}>
+              {img}
+            </a>
           ) : (
-            <span class="card-img card-img--empty" aria-hidden="true" />
+            <a
+              class="card-img card-img--empty"
+              href={c.href}
+              aria-label={c.title}
+            />
           )}
-          <span class="card-body">
-            <span class="card-title">{c.title}</span>
-            {c.desc && <span class="card-desc">{c.desc}</span>}
-          </span>
-        </a>
+          <div class="card-body">
+            <h3 class="card-title">{c.title}</h3>
+            {c.desc && <p class="card-desc">{c.desc}</p>}
+            <a class="btn btn-teal card-btn" href={c.href}>
+              {buttonLabel}
+            </a>
+          </div>
+        </article>
       );
     })
   }

@@ -50,11 +50,128 @@ blocks.forEach((b, i) => {
   if (b.type === 'p' && !skip.has(i) && blocks[i + 1]?.type === 'ul' && !isCardList(blocks[i + 1]))
     skip.add(i + 1);
 });
+
+// ---------- heavy closing section (text + closing round) ----------
+// The trailing call block: the page's LAST H2 plus every paragraph
+// after it, provided the first such paragraph holds the doc phone
+// "(385) 488-1110" as plain text. That pattern is the closing on 43 of
+// 44 pages (home, all 20 services, both guides, all 7 blogs, the areas
+// hub, all 6 area pages, all 6 area-service pages, About). /contact/ is
+// the one exception — its last H2 is "Contact FAQs", followed by FAQ
+// H3s, not paragraphs — so it never matches and renders unchanged.
+// Words and links stay doc-verbatim: the phone number appears exactly
+// ONCE, rendered as the big gold tel: button in its original position
+// in the sentence (never duplicated, never dropped), and every link
+// keeps its exact anchor text and href. No new words are added.
+const PHONE = '(385) 488-1110';
+const PHONE_TEL = 'tel:+13854881110';
+let closingStart = -1;
+{
+  const h2Idx = [];
+  blocks.forEach((b, i) => {
+    if (b.type === 'h2') h2Idx.push(i);
+  });
+  const last = h2Idx[h2Idx.length - 1];
+  if (last !== undefined && last < blocks.length - 1) {
+    const tail = blocks.slice(last + 1);
+    if (
+      tail.every((b) => b.type === 'p') &&
+      tail[0].segments.some((s) => !s.href && s.t.includes(PHONE))
+    ) {
+      closingStart = last;
+    }
+  }
+}
+/** Split a closing paragraph's segments so the doc phone becomes a
+ *  tel: link (kind 'phone') in place; plain text and doc links pass
+ *  through untouched. Token-for-token identical to the doc text. */
+function closingSegs(p) {
+  const out = [];
+  for (const s of p.segments) {
+    if (s.href) {
+      out.push({ kind: 'link', t: s.t, href: s.href });
+      continue;
+    }
+    let rest = s.t;
+    let idx = rest.indexOf(PHONE);
+    while (idx >= 0) {
+      if (idx > 0) out.push({ kind: 'text', t: rest.slice(0, idx) });
+      out.push({ kind: 'phone', t: PHONE });
+      rest = rest.slice(idx + PHONE.length);
+      idx = rest.indexOf(PHONE);
+    }
+    if (rest) out.push({ kind: 'text', t: rest });
+  }
+  return out;
+}
+function closingClass(p) {
+  const t = p.segments.map((s) => s.t).join('');
+  if (t.startsWith('Serving Midvale and nearby:')) return 'closing-serving';
+  if (t.startsWith('Related:')) return 'closing-related';
+  return 'closing-call';
+}
+/** Group a closing paragraph's units so a link keeps the punctuation
+ *  that follows it (", ", " · ", ".") glued to it: on mobile the bare
+ *  "·" was wrapping onto a line of its own between two chips. The
+ *  characters stay exactly as in the doc, in the same order — only the
+ *  wrapping changes (see .closing-unit in global.css). */
+function closingUnits(p) {
+  const segs = closingSegs(p);
+  const units = [];
+  for (let k = 0; k < segs.length; k++) {
+    const s = segs[k];
+    if (s.kind === 'link') {
+      let punct = '';
+      while (
+        k + 1 < segs.length &&
+        segs[k + 1].kind === 'text' &&
+        /^[\s,.;·]+$/.test(segs[k + 1].t)
+      ) {
+        punct += segs[k + 1].t;
+        k++;
+      }
+      units.push({ kind: 'link', t: s.t, href: s.href, punct });
+    } else {
+      units.push(s);
+    }
+  }
+  return units;
+}
 ---
 
 {
   blocks.map((b, i) => {
     if (skip.has(i)) return null;
+    // Heavy closing section: the last H2 + its trailing paragraphs
+    // render as one branded deep-teal panel (see .closing in
+    // global.css). The H2 and every paragraph are doc-verbatim.
+    if (closingStart >= 0 && i >= closingStart) {
+      if (i !== closingStart) return null;
+      const tail = blocks.slice(closingStart + 1);
+      return (
+        <section class="closing">
+          <h2>{b.text}</h2>
+          {tail.map((p) => (
+            <p class={closingClass(p)}>
+              {closingUnits(p).map((s) =>
+                s.kind === 'phone' ? (
+                  <a class="closing-phone" href={PHONE_TEL}>
+                    {s.t}
+                  </a>
+                ) : s.kind === 'link' ? (
+                  <span class="closing-unit">
+                    <a href={s.href}>{s.t}</a>
+                    {s.punct && <span class="closing-punct">{s.punct}</span>}
+                  </span>
+                ) : (
+                  <span>{s.t}</span>
+                ),
+              )}
+            </p>
+          ))}
+        </section>
+      );
+    }
     const next = blocks[i + 1];
     if (b.type === 'p') {
       if (next?.type === 'ul' && !isCardList(next)) {
