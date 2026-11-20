@@ -1,12 +1,12 @@
 import { pages } from '../lib/site.js';
 import { canonicalFor } from '../lib/site.js';
 
-// Owner order 2026-11-21 00:05 PKT: sitemap lastmod split 50/50 — the first
-// half of the sitemap's URL order (22 URLs) is dated today (2026-11-21) and
-// the second half (22 URLs) tomorrow (2026-11-22). Half of the dates are
-// therefore tomorrow's date, per his explicit order.
-const FIRST_HALF_DATE = '2026-11-21';
-const SECOND_HALF_DATE = '2026-11-22';
+// Owner order 2026-11-21 03:26 PKT: sitemap lastmod split — the first
+// half of the sitemap's URL order (22 URLs) is dated yesterday
+// (2026-11-20, guzra hua kal) and the second half (22 URLs) today
+// (2026-11-21, aj). Same yesterday+today convention as Lake Oswego.
+const FIRST_HALF_DATE = '2026-11-20';
+const SECOND_HALF_DATE = '2026-11-21';
 const SPLIT_AT = 22; // 44 URLs / 2
 
 export async function GET() {
