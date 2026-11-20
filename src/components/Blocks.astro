@@ -1,0 +1,151 @@
+---
+import Segments from './Segments.astro';
+// Renders one page's parsed doc blocks verbatim. No words are added,
+// removed or reordered here; links come only from the doc annotations
+// already resolved by scripts/parse_doc.py.
+//
+// Pairing rules (presentation only, words unchanged):
+//  - a paragraph directly before a list becomes that list's lead-in
+//    inside a "facts" card ("Quick facts" on the homepage);
+//  - an FAQ H3 + the paragraph that follows it stay together in one
+//    .faq-item card (the paragraph is then skipped as a standalone block).
+const { blocks } = Astro.props;
+
+const skip = new Set();
+blocks.forEach((b, i) => {
+  if (b.type === 'h3' && b.faq && blocks[i + 1]?.type === 'p') skip.add(i + 1);
+});
+blocks.forEach((b, i) => {
+  if (b.type === 'p' && !skip.has(i) && blocks[i + 1]?.type === 'ul') skip.add(i + 1);
+});
+---
+
+{
+  blocks.map((b, i) => {
+    if (skip.has(i)) return null;
+    const next = blocks[i + 1];
+    if (b.type === 'p') {
+      if (next?.type === 'ul') {
+        return (
+          <div class="facts">
+            <p class="lead-in">
+              <Segments segments={b.segments} />
+            </p>
+            <ul>
+              {next.items.map((it, j) => (
+                <li>
+                  <Segments segments={it} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
+      return (
+        <p>
+          <Segments segments={b.segments} />
+        </p>
+      );
+    }
+    if (b.type === 'ul') {
+      return (
+        <ul>
+          {b.items.map((it, j) => (
+            <li>
+              <Segments segments={it} />
+            </li>
+          ))}
+        </ul>
+      );
+    }
+    if (b.type === 'h2') return <h2>{b.text}</h2>;
+    if (b.type === 'h3') {
+      if (b.faq && next?.type === 'p') {
+        return (
+          <div class="faq-item">
+            <h3>{b.text}</h3>
+            <p>
+              <Segments segments={next.segments} />
+            </p>
+          </div>
+        );
+      }
+      return <h3>{b.text}</h3>;
+    }
+    if (b.type === 'table') {
+      // Fix Round 2: column count decides the mobile treatment. Tables
+      // with 3 or fewer columns fit the 350px wrapper with fixed layout
+      // and read cleanly; 4+ column tables get .table-wrap--wide, which
+      // restores intact horizontal scrolling instead of shattering words
+      // (a 4-col table squeezed to ~87px columns broke nearly every long
+      // word mid-word). Words unchanged; presentation class only.
+      // Fix Round 3: with break-word removed (overflow-wrap: normal),
+      // 13 more ≤3-col tables overflow their fixed ~117px columns by
+      // 5–26px (one long word per table: 'Submersible pump',
+      // 'Dehumidifiers', 'Antimicrobial', 'Dishwasher', 'groundwater',
+      // 'professional', ... — measured per-cell scrollWidth > clientWidth
+      // at 390px, qa/fix-round3/results-render.json). Per the Round 3
+      // rule those tables get the wide scroll treatment too, keyed here
+      // by slug + table ordinal (0-based among the page's tables).
+      // Measured clean after this change: 0 overflowing cells, 0
+      // mid-word splits sitewide at 390px.
+      const WIDE_TABLES = new Set([
+        '/emergency-water-removal/#0',
+        '/ice-dam-water-damage/#0',
+        '/basement-flooding-cleanup/#0',
+        '/basement-flooding-cleanup/#1',
+        '/mold-remediation/#0',
+        '/flood-damage-restoration/#0',
+        '/water-heater-leak-cleanup/#0',
+        '/appliance-leak-water-damage/#0',
+        '/wet-carpet-drying/#0',
+        '/hardwood-floor-water-damage/#0',
+        '/restoration-process/#0',
+        '/insurance-claims-help/#0',
+        '/blog/how-long-does-water-damage-take-to-dry/#0',
+      ]);
+      const cols = Math.max(...b.rows.map((row) => row.length));
+      const tableOrdinal = blocks.slice(0, i).filter((x) => x.type === 'table').length;
+      const forceWide = WIDE_TABLES.has(`${Astro.props.slug}#${tableOrdinal}`);
+      return (
+        <div class={cols >= 4 || forceWide ? 'table-wrap table-wrap--wide' : 'table-wrap'}>
+          <table>
+            {b.rows.map((row, ri) => (
+              <tr>
+                {row.map((cell, ci) =>
+                  ri === 0 && b.has_header !== false ? (
+                    <th scope="col">
+                      <Segments segments={cell} />
+                    </th>
+                  ) : (
+                    <td>
+                      <Segments segments={cell} />
+                    </td>
+                  ),
+                )}
+              </tr>
+            ))}
+          </table>
+        </div>
+      );
+    }
+    if (b.type === 'cta') {
+      return (
+        <div class="cta-row">
+          {b.buttons.map((btn) =>
+            btn.tel ? (
+              <a class="btn btn-gold" href={btn.tel}>
+                {btn.label}
+              </a>
+            ) : (
+              <a class="btn btn-teal" href={btn.href}>
+                {btn.label}
+              </a>
+            ),
+          )}
+        </div>
+      );
+    }
+    return null;
+  })
+}

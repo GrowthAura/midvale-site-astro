@@ -1,0 +1,16 @@
+---
+// Renders a paragraph's inline segments verbatim: plain text spans and
+// doc-annotation links only. No rel="nofollow" — all internal links are
+// plain dofollow.
+const { segments } = Astro.props;
+---
+
+<>
+  {segments.map((s) =>
+    s.href ? (
+      <a href={s.href}>{s.t}</a>
+    ) : (
+      <span>{s.t}</span>
+    ),
+  )}
+</>

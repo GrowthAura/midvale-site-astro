@@ -1,0 +1,7 @@
+node_modules/
+dist/
+qa/
+.astro/
+*.log
+tmp-chrome/
+.DS_Store
